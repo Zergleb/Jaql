@@ -9,12 +9,13 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.nio.charset.StandardCharsets.*;
 
 public class Jaql {
-    String nextLine = "";
-    private static final String NAME_PREFIX = "-- name: ";
+    private String nextLine = "";
 
     private Map<String, String> queriesByName = new HashMap<>();
 
@@ -23,31 +24,38 @@ public class Jaql {
         Iterable<String> lines = Splitter.on("\n").omitEmptyStrings().trimResults().split(inputString);
         Iterator<String> linesIterator = lines.iterator();
 
-        while(linesIterator.hasNext()) {
-            String line = "";
-            if(StringUtils.isNotBlank(nextLine)) {
+        while (linesIterator.hasNext()) {
+            String line;
+            if (StringUtils.isNotBlank(nextLine)) {
                 line = nextLine;
                 nextLine = "";
             } else {
                 line = linesIterator.next();
             }
-            if(StringUtils.startsWith(line, NAME_PREFIX)) {
-               String name = StringUtils.removeStart(line, NAME_PREFIX).trim();
-               StringBuilder sb = new StringBuilder();
-               boolean firstLine = true;
-               while(linesIterator.hasNext()) {
+
+            String regex = "^\\s*--\\s*name:\\s*";
+            Pattern namePattern = Pattern.compile(regex);
+            Matcher nameMatcher = namePattern.matcher(line);
+            if (nameMatcher.find()) {
+                String name = line.replaceAll(regex, "");
+                StringBuilder sb = new StringBuilder();
+                boolean firstLine = true;
+                while (linesIterator.hasNext()) {
                     String queryLine = linesIterator.next();
-                    if(StringUtils.startsWith(queryLine, NAME_PREFIX)) {
+                    nameMatcher = namePattern.matcher(queryLine);
+                    if (nameMatcher.find()) {
                         nextLine = queryLine;
                         break;
                     }
-                    if(firstLine == false) {
+
+                    if (!firstLine) {
                         sb.append("\n");
                     }
+
                     sb.append(queryLine);
                     firstLine = false;
-               }
-               queriesByName.put(name, sb.toString());
+                }
+                queriesByName.put(name, sb.toString());
             }
         }
     }
