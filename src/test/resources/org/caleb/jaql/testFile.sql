@@ -32,11 +32,15 @@ select * from manyspaces
 
 select * from allspaces
 
--- name: blankQuery
-
+-- name: queryWithComment
+-- comment below meant to mix things up
 -- name:
 
-select * from noname
+-- another comment
+
+select * from queryWithComment
+
+-- name: blankQuery
 
 -- name: spaced Name Query
 
