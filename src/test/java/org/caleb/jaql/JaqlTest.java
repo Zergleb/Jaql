@@ -20,8 +20,10 @@ public class JaqlTest {
         assertEquals("select * from manyspaces", jaql.getQueryByName("manySpaceQuery"));
         assertEquals("select * from allspaces", jaql.getQueryByName("allSpaceQuery"));
         assertEquals("", jaql.getQueryByName("blankQuery"));
-        assertEquals("select * from queryWithComment", jaql.getQueryByName("queryWithComment"));
-        assertEquals(null, jaql.getQueryByName(""));
+        assertEquals("select * from queryWithComment\n" +
+                "select * from inlineComment\n" +
+                "select * from multilineComment", jaql.getQueryByName("queryWithComment"));
+        assertNull(jaql.getQueryByName(""));
         assertEquals("select * from spacedname", jaql.getQueryByName("spaced Name Query"));
         assertEquals("select * from endquery", jaql.getQueryByName("endQuery"));
     }

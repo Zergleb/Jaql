@@ -15,13 +15,17 @@ import static java.nio.charset.StandardCharsets.*;
 
 public class Jaql {
     String nextLine = "";
-    private static final RegexValidator NAME_REGEX = new RegexValidator("-.*?-.*?name.*?: *?([a-zA-Z1-9 ]+)");
-    private static final RegexValidator SQL_COMMENT = new RegexValidator("--.*?");
+    private static final RegexValidator NAME_REGEX = new RegexValidator("-- *name *: *([a-zA-Z0-9 ]+)");
+    private static final RegexValidator SQL_COMMENT = new RegexValidator("--.*");
+    private static final String MULTILINE_COMMENT = "(?s)\\/\\*.*?\\*\\/";
+    private static final String INLINE_COMMENT = "\\s*--.*";
 
     private Map<String, String> queriesByName = new HashMap<>();
 
     public Jaql(InputStream resourceAsStream) throws IOException {
         String inputString = IOUtils.toString(resourceAsStream, UTF_8);
+        inputString = inputString.replaceAll(MULTILINE_COMMENT, "");
+
         Iterable<String> lines = Splitter.on("\n").omitEmptyStrings().trimResults().split(inputString);
         Iterator<String> linesIterator = lines.iterator();
 
@@ -47,9 +51,10 @@ public class Jaql {
                     if(SQL_COMMENT.isValid(queryLine) == false) {
                         if(firstLine == false) {
                             sb.append("\n");
-                            firstLine = false;
                         }
+                        queryLine = queryLine.replaceAll(INLINE_COMMENT, "");
                         sb.append(queryLine);
+                        firstLine = false;
                     }
                }
                queriesByName.put(name, sb.toString());

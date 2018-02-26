@@ -39,6 +39,9 @@ select * from allspaces
 -- another comment
 
 select * from queryWithComment
+select * from inlineComment --here's a comment
+/* this is a
+multiline comment */ select * from multilineComment
 
 -- name: blankQuery
 
