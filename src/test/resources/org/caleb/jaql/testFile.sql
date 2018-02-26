@@ -37,11 +37,13 @@ select * from allspaces
 -- name:
 
 -- another comment
-
+/* before query */
 select * from queryWithComment
 select * from inlineComment --here's a comment
 /* this is a
-multiline comment */ select * from multilineComment
+multiline comment
+within the query */ select * from multilineComment
+/* after query */
 
 -- name: blankQuery
 
