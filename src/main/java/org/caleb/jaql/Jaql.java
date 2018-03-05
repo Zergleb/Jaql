@@ -15,7 +15,7 @@ import static java.nio.charset.StandardCharsets.*;
 
 public class Jaql {
     String nextLine = "";
-    private static final RegexValidator NAME_REGEX = new RegexValidator("-- *name *: *([a-zA-Z0-9 ]+)");
+    private static final RegexValidator NAME_REGEX = new RegexValidator("-- *name *: *([a-zA-Z0-9 _-]+)");
     private static final RegexValidator SQL_COMMENT = new RegexValidator("--.*");
     private static final String MULTILINE_COMMENT = "(?s)\\/\\*.*?\\*\\/";
     private static final String INLINE_COMMENT = "\\s*--.*";
