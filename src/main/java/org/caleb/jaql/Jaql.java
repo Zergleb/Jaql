@@ -7,9 +7,7 @@ import org.apache.commons.validator.routines.RegexValidator;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import static java.nio.charset.StandardCharsets.*;
 
@@ -64,5 +62,11 @@ public class Jaql {
 
     public String getQueryByName(String name) {
         return queriesByName.get(name);
+    }
+
+    public List<String> getQueryNames() {
+        List<String> queryNames = new ArrayList<>(queriesByName.keySet());
+        Collections.sort(queryNames);
+        return queryNames;
     }
 }
