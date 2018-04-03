@@ -22,7 +22,7 @@ public class Jaql {
 
     public Jaql(InputStream resourceAsStream) throws IOException {
         String inputString = IOUtils.toString(resourceAsStream, UTF_8);
-        inputString = inputString.replaceAll(MULTILINE_COMMENT, "");
+        inputString = inputString.replaceAll(MULTILINE_COMMENT, " ");
 
         Iterable<String> lines = Splitter.on("\n").omitEmptyStrings().trimResults().split(inputString);
         Iterator<String> linesIterator = lines.iterator();

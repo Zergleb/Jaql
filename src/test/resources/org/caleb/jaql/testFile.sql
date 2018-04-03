@@ -1,4 +1,5 @@
 select * from badnameloc -- name: badNameLocation
+select * from underBadNameLoc
 
 -- name: firstQuery
 

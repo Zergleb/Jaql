@@ -9,6 +9,7 @@ public class JaqlTest {
     public void testNothing() throws Throwable {
         Jaql jaql = new Jaql(JaqlTest.class.getResourceAsStream("testFile.sql"));
 
+        assertEquals(12, jaql.getQueryNames().size());
         assertNull(jaql.getQueryByName("doesntExist"));
         assertNull(jaql.getQueryByName("badNameLocation"));
         assertEquals("select * from something;", jaql.getQueryByName("firstQuery"));
