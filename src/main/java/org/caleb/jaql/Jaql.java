@@ -66,7 +66,7 @@ public class Jaql {
         this.replaceTagsEnd = replaceTagsEnd;
     }
 
-    public String getQueryByName(String name, Map<String, String> replaceValues) {
+    public String getQueryByNameUnsafeNoEscapeVals(String name, Map<String, String> replaceValues) {
         String query = queriesByName.get(name);
         for(Entry<String, String> entry : replaceValues.entrySet()) {
             query = query.replace(replaceTagsStart + entry.getKey() + replaceTagsEnd, entry.getValue());

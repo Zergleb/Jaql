@@ -8,5 +8,5 @@ This is not hosted on maven central I just use https://jitpack.io/ for hosting.
     }
     
     dependencies {
-        compile 'com.github.Zergleb:Jaql:0.0.1' // You can see the releases in the releases tab.
+        compile 'com.github.Zergleb:Jaql:(Last Tagged Release Number e.g. '0.0.1')' // You can see the releases in the releases tab.
     }
