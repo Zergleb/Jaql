@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.caleb.jaql.JaqlTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-10-31T06:47:12" hostname="Laptop-Mac-151" time="0.035">
+  <properties/>
+  <testcase name="testRetrieveTemplates" classname="org.caleb.jaql.JaqlTest" time="0.035"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
